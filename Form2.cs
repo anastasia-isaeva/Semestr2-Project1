@@ -15,18 +15,6 @@ namespace Semestr_Project
         public AboutForm()
         {
             InitializeComponent();
-            textBox1.Text = @"tut byl vasya
-and petya";
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -34,9 +22,6 @@ and petya";
             this.Close();
         }
 
-        private void textBox1_DoubleClick(object sender, EventArgs e)
-        {
-            textBox1.Text += "\r\nSosi pipisku";
-        }
+       
     }
 }

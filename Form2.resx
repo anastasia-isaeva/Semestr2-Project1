@@ -117,4 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>Anastasia Isaeva
+CITC-1311-C01-Programming II
+Professor Curtis M. Knowles
+April 7, 2020
+
+Game "Evolution"
+Semester Project Step 4 (Beta)
+
+This game is based on the game "Life", is a cellular automaton invented by the English mathematician John Conway in 1970.</value>
+  </data>
 </root>
