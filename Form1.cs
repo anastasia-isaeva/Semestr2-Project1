@@ -13,7 +13,7 @@ namespace Semestr_Project
     public partial class Game : Form
     {
         private const int gridSize = 10;
-        private int[, ] cells = new int[90, 50];
+        private int[, ] cells = new int[92, 52];
 
         public Game()
         {
@@ -59,10 +59,10 @@ namespace Semestr_Project
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             //MessageBox.Show(string.Format("X: {0} Y: {1}, square ({2}, {3})", e.X, e.Y, e.X/gridSize, e.Y/gridSize));
-            var xNum = e.X / gridSize;
-            var yNum = e.Y / gridSize;
-            var cornerTopX = gridSize * xNum + 1;
-            var cornerTopY = gridSize * yNum + 1;
+            var xNum = 1 + e.X / gridSize;
+            var yNum = 1 + e.Y / gridSize;
+            var cornerTopX = gridSize * (xNum - 1) + 1;
+            var cornerTopY = gridSize * (yNum - 1) + 1;
 
             var color = Brushes.Red;
             cells[xNum, yNum] = 1 - cells[xNum, yNum];
@@ -76,6 +76,23 @@ namespace Semestr_Project
             Graphics gridGraphics = Graphics.FromImage(grid);
             gridGraphics.FillRectangle(color, cornerTopX, cornerTopY, gridSize - 1, gridSize - 1 );
             pictureBox1.Image = grid;
+        }
+
+        private void NextStep()
+        {
+            int[,] cellsNew = new int[92, 52];
+            for (int i = 1; i < cells.GetLength(0) - 1; i++)
+            {
+                for (int j = 1; j < cells.GetLength(1) - 1; j++)
+                {
+                    Console.WriteLine(j);
+                }
+            }
+        }
+
+        private void buttonNextStep_Click(object sender, EventArgs e)
+        {
+            NextStep();
         }
     }
 }
