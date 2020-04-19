@@ -15,9 +15,21 @@ namespace Semestr_Project
         private const int gridSize = 10;
         private int[, ] cells = new int[92, 52];
 
+        /*
+         * Here will be variables for rules
+         */
+        public int lonelinessThreshold = 2;
+        public int overPopulationThreshold = 3;
+        public int birthCondition = 3;
+
         public Game()
         {
             InitializeComponent();
+            ResetGrid();
+        }
+
+        private void ResetGrid()
+        {
             Bitmap grid = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Pen blackPen = new Pen(Color.Black, 1);
 
@@ -56,17 +68,13 @@ namespace Semestr_Project
             form.Visible = true;
         }
 
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void FillCell(int x, int y)
         {
-            //MessageBox.Show(string.Format("X: {0} Y: {1}, square ({2}, {3})", e.X, e.Y, e.X/gridSize, e.Y/gridSize));
-            var xNum = 1 + e.X / gridSize;
-            var yNum = 1 + e.Y / gridSize;
-            var cornerTopX = gridSize * (xNum - 1) + 1;
-            var cornerTopY = gridSize * (yNum - 1) + 1;
-
+            var cornerTopX = gridSize * (x - 1) + 1;
+            var cornerTopY = gridSize * (y - 1) + 1;
             var color = Brushes.Red;
-            cells[xNum, yNum] = 1 - cells[xNum, yNum];
-            if (cells[xNum, yNum] == 0)
+
+            if (cells[x, y] == 0)
             {
                 color = Brushes.White;
             }
@@ -78,6 +86,30 @@ namespace Semestr_Project
             pictureBox1.Image = grid;
         }
 
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            //MessageBox.Show(string.Format("X: {0} Y: {1}, square ({2}, {3})", e.X, e.Y, e.X/gridSize, e.Y/gridSize));
+            var xNum = 1 + e.X / gridSize;
+            var yNum = 1 + e.Y / gridSize;
+            cells[xNum, yNum] = 1 - cells[xNum, yNum];
+            FillCell(xNum, yNum);
+        }
+
+        private int CalculateAliveNeighbours(int x, int y)
+        {
+            int aliveNeighbours = 0;
+
+            for (int a = x - 1; a <= x + 1; a++)
+            {
+                for (int b = y - 1; b <= y + 1; b++)
+                {
+                    aliveNeighbours += cells[a, b];
+                }
+            }
+            aliveNeighbours -= cells[x, y];
+            return aliveNeighbours;
+        }
+
         private void NextStep()
         {
             int[,] cellsNew = new int[92, 52];
@@ -85,7 +117,33 @@ namespace Semestr_Project
             {
                 for (int j = 1; j < cells.GetLength(1) - 1; j++)
                 {
-                    Console.WriteLine(j);
+                    int neighbours = CalculateAliveNeighbours(i, j);
+                    if (cells[i, j] == 0)
+                    {
+                        if (neighbours == birthCondition)
+                        {
+                            cellsNew[i, j] = 1;
+                        }
+                    }
+                    else
+                    {
+                        if (neighbours <= overPopulationThreshold && neighbours >= lonelinessThreshold)
+                        {
+                            cellsNew[i, j] = 1;
+                        }
+                    }
+                }
+            }
+            cells = cellsNew;
+            ResetGrid();
+            for (int i = 1; i < cells.GetLength(0) - 1; i++)
+            {
+                for (int j = 1; j < cells.GetLength(1) - 1; j++)
+                {
+                    if (cells[i, j] == 1)
+                    {
+                        FillCell(i, j);
+                    }
                 }
             }
         }
