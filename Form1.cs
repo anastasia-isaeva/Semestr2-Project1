@@ -18,9 +18,9 @@ namespace Semestr_Project
         /*
          * Here will be variables for rules
          */
-        public int lonelinessThreshold = 2;
-        public int overPopulationThreshold = 3;
-        public int birthCondition = 3;
+        private static int lonelinessThreshold = 2;
+        private static int overPopulationThreshold = 3;
+        private static int birthCondition = 3;
 
         public Game()
         {
@@ -28,6 +28,35 @@ namespace Semestr_Project
             ResetGrid();
         }
 
+        public static int GetLonelinessThreshold()
+        {
+            return lonelinessThreshold;
+        }
+
+        public static int GetOverpopulation()
+        {
+            return overPopulationThreshold;
+        }
+
+        public static int GetBirthCondition()
+        {
+            return birthCondition;
+        }
+
+        public static void SetLonelinessThreshold(int value)
+        {
+            lonelinessThreshold = value;
+        }
+
+        public static void SetOverpopulationThreshold(int value)
+        {
+            overPopulationThreshold = value;
+        }
+
+        public static void SetBirthCondition(int value)
+        {
+            birthCondition = value;
+        }
         private void ResetGrid()
         {
             Bitmap grid = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -151,6 +180,31 @@ namespace Semestr_Project
         private void buttonNextStep_Click(object sender, EventArgs e)
         {
             NextStep();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            ResetGrid();
+            int[,] cellsNew = new int[92, 52];
+            cells = cellsNew;
+        }
+
+        private void runTimer_Tick(object sender, EventArgs e)
+        {
+            NextStep();
+        }
+
+        private void buttonRun_Click(object sender, EventArgs e)
+        {
+            runTimer.Enabled = !runTimer.Enabled;
+            if (runTimer.Enabled)
+            {
+                buttonRun.Text = "Stop";
+            }
+            else
+            {
+                buttonRun.Text = "Run";
+            }
         }
     }
 }

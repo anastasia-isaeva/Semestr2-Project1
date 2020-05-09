@@ -15,6 +15,23 @@ namespace Semestr_Project
         public SettingsForm()
         {
             InitializeComponent();
+
+            LonelinessNumericUpDown.Value = Game.GetLonelinessThreshold();
+            OverpopulationNumericUpDown.Value = Game.GetOverpopulation();
+            BirthConditionNumericUpDown.Value = Game.GetBirthCondition();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Game.SetLonelinessThreshold(Convert.ToInt32(LonelinessNumericUpDown.Value));
+            Game.SetOverpopulationThreshold(Convert.ToInt32(OverpopulationNumericUpDown.Value));
+            Game.SetBirthCondition(Convert.ToInt32(BirthConditionNumericUpDown.Value));
+            this.Close();
         }
     }
 }

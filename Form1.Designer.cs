@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,6 +37,9 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonNextStep = new System.Windows.Forms.Button();
+            this.buttonReset = new System.Windows.Forms.Button();
+            this.runTimer = new System.Windows.Forms.Timer(this.components);
+            this.buttonRun = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -109,12 +113,41 @@
             this.buttonNextStep.UseVisualStyleBackColor = true;
             this.buttonNextStep.Click += new System.EventHandler(this.buttonNextStep_Click);
             // 
+            // buttonReset
+            // 
+            this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonReset.Location = new System.Drawing.Point(160, 555);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(101, 28);
+            this.buttonReset.TabIndex = 3;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            // 
+            // runTimer
+            // 
+            this.runTimer.Interval = 400;
+            this.runTimer.Tick += new System.EventHandler(this.runTimer_Tick);
+            // 
+            // buttonRun
+            // 
+            this.buttonRun.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonRun.Location = new System.Drawing.Point(286, 555);
+            this.buttonRun.Name = "buttonRun";
+            this.buttonRun.Size = new System.Drawing.Size(97, 28);
+            this.buttonRun.TabIndex = 4;
+            this.buttonRun.Text = "Run";
+            this.buttonRun.UseVisualStyleBackColor = true;
+            this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1025, 762);
+            this.Controls.Add(this.buttonRun);
+            this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonNextStep);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
@@ -141,6 +174,9 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button buttonNextStep;
+        private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Timer runTimer;
+        private System.Windows.Forms.Button buttonRun;
     }
 }
 
